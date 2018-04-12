@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "591820467387",
+    "firebase_url": "https://pusher-articles.firebaseio.com",
+    "project_id": "pusher-articles",
+    "storage_bucket": "pusher-articles.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:591820467387:android:8992a04987c0ba1e",
+        "android_client_info": {
+          "package_name": "com.pusher.pushnotify.news"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "591820467387-51frlp1epegbkjt9uvpk9t1iofff9c09.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAEM4gmWWW6zdiwdzG7y58Bds9o3WHcr0E"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
