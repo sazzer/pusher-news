@@ -21,7 +21,7 @@ open class GuardianApi(
                 .toUri()
 
         return restTemplate.getForObject(uri, SectionPayload::class.java)
-                .response.results
+                ?.response?.results ?: emptyList()
     }
 
     open fun listArticles(from: Instant?): List<Article> {
@@ -40,6 +40,6 @@ open class GuardianApi(
         val uri = uriBuilder.build().toUri()
 
         return restTemplate.getForObject(uri, ArticlePayload::class.java)
-                .response.results
+                ?.response?.results ?: emptyList()
     }
 }
