@@ -4,10 +4,14 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Build
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.NotificationCompat
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.widget.ListView
@@ -16,13 +20,8 @@ import com.loopj.android.http.AsyncHttpClient
 import com.loopj.android.http.JsonHttpResponseHandler
 import com.pusher.pushnotifications.PushNotificationReceivedListener
 import com.pusher.pushnotifications.PushNotifications
-import com.pusher.pushnotifications.fcm.FCMMessagingService
 import cz.msebera.android.httpclient.Header
 import org.json.JSONArray
-import android.content.Intent
-import android.net.Uri
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -33,7 +32,10 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+    }
 
+    override fun onResume() {
+        super.onResume()
         PushNotifications.start(getApplicationContext(), "PUSHER_INSTANCE_ID")
 
         recordAdapter = SectionEntryAdapter(this)
@@ -43,10 +45,10 @@ class MainActivity : AppCompatActivity() {
         refreshEventsList()
 
         receiveNotifications()
+
     }
 
     private fun receiveNotifications() {
-
         val notificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -58,7 +60,7 @@ class MainActivity : AppCompatActivity() {
 
         var notificationId = 0
 
-        FCMMessagingService.setOnMessageReceivedListener(object : PushNotificationReceivedListener {
+        PushNotifications.setOnMessageReceivedListenerForVisibleActivity(this, object : PushNotificationReceivedListener {
             override fun onMessageReceived(remoteMessage: RemoteMessage) {
                 Log.v("ReceivedMessage", remoteMessage.data.toString())
                 val headine = remoteMessage.data["headline"]
