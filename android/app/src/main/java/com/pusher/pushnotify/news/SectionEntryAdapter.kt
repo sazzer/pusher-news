@@ -43,9 +43,9 @@ class SectionEntryAdapter(private val recordContext: Context) : BaseAdapter() {
 
         sectionViewHolder.selected.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                PushNotifications.subscribe(section.id)
+                PushNotifications.subscribe(section.id.replace("[^A-Za-z0-9-]".toRegex(), ""))
             } else {
-                PushNotifications.unsubscribe(section.id)
+                PushNotifications.unsubscribe(section.id.replace("[^A-Za-z0-9-]".toRegex(), ""))
             }
         }
 

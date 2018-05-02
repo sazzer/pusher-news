@@ -14,7 +14,7 @@ class ArticleNotifier(
     fun notify(article: Article) {
         System.out.println(article)
         pusher.publish(
-                listOf(article.sectionId),
+                listOf(article.sectionId.replace("[^A-Za-z0-9-]".toRegex(), "")),
                 mapOf(
                         "fcm" to mapOf(
                                 "data" to mapOf(
